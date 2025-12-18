@@ -58,3 +58,30 @@ const AboutSection = () => {
               </p>
             </ScrollReveal>
           </div>
+            {/* Right Content - Feature Cards */}
+          <StaggerContainer className="space-y-6" staggerDelay={0.15}>
+            {features.map((feature, index) => (
+              <StaggerItem key={index}>
+                <div className="flex gap-5 p-6 bg-card rounded-xl border border-border/50 hover:border-primary/30 transition-all duration-300 group hover:translate-x-2">
+                  <div className="flex-shrink-0 w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
+                    <feature.icon className="w-7 h-7 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold mb-1 text-foreground">
+                      {feature.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm">
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default AboutSection;
