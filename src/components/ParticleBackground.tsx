@@ -42,3 +42,57 @@ const ParticleBackground = () => {
         });
       }
     };
+
+
+      const drawGrid = () => {
+      const gridSize = 80;
+      ctx.strokeStyle = "rgba(255, 123, 0, 0.03)";
+      ctx.lineWidth = 1;
+
+      // Vertical lines
+      for (let x = 0; x < canvas.width; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      }
+
+      // Horizontal lines
+      for (let y = 0; y < canvas.height; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+    };
+
+    const drawParticles = () => {
+      particles.current.forEach((particle) => {
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 123, 0, ${particle.opacity})`;
+        ctx.fill();
+      });
+    };
+
+    const drawConnections = () => {
+      const maxDistance = 150;
+      
+      particles.current.forEach((particle, i) => {
+        // Connect to nearby particles
+        for (let j = i + 1; j < particles.current.length; j++) {
+          const other = particles.current[j];
+          const dx = particle.x - other.x;
+          const dy = particle.y - other.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < maxDistance) {
+            const opacity = (1 - distance / maxDistance) * 0.2;
+            ctx.beginPath();
+            ctx.moveTo(particle.x, particle.y);
+            ctx.lineTo(other.x, other.y);
+            ctx.strokeStyle = `rgba(255, 123, 0, ${opacity})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
