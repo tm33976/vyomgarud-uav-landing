@@ -35,3 +35,26 @@ const AboutSection = () => {
                 About Us
               </span>
             </ScrollReveal>
+             <ScrollReveal direction="left" delay={0.1}>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                Redefining Aerial{" "}
+                <span className="text-gradient">Autonomy</span>
+              </h2>
+            </ScrollReveal>
+            
+            <ScrollReveal direction="left" delay={0.2}>
+              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                VyomGarud is at the forefront of unmanned aerial vehicle technology, 
+                developing next-generation autonomous systems that set new standards 
+                for reliability, precision, and operational capability.
+              </p>
+            </ScrollReveal>
+            
+            <ScrollReveal direction="left" delay={0.3}>
+              <p className="text-muted-foreground leading-relaxed">
+                Our mission is to empower defense and surveillance operations with 
+                cutting-edge UAV platforms that combine advanced AI, robust engineering, 
+                and seamless integration for mission success.
+              </p>
+            </ScrollReveal>
+          </div>
