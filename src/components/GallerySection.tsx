@@ -54,3 +54,27 @@ const galleryItems = [
     description: "Precision inspection of electrical infrastructure for preventive maintenance.",
   },
 ];
+const categories = ["All", "Surveillance", "Tactical", "Emergency", "Naval", "Defense", "Industrial"];
+
+const GallerySection = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  const filteredItems = activeCategory === "All" 
+    ? galleryItems 
+    : galleryItems.filter(item => item.category === activeCategory);
+  return (
+    <section id="gallery" className="py-32 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px]" />
+      <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px]" />
+
+      <div className="container mx-auto px-6 lg:px-8 relative z-10" ref={ref}>
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <ScrollReveal direction="up" delay={0}>
+            <span className="inline-block px-3 py-1 mb-4 text-xs font-semibold uppercase tracking-widest text-primary border border-primary/30 rounded-full bg-primary/5">
+              Mission Portfolio
+            </span>
+          </ScrollReveal>
