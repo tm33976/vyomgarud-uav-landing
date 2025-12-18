@@ -140,4 +140,49 @@ const ParticleBackground = () => {
       });
     };
 
-    
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      drawGrid();
+      updateParticles();
+      drawParticles();
+      drawConnections();
+
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current = { x: e.clientX, y: e.clientY };
+    };
+
+    const handleResize = () => {
+      resizeCanvas();
+      createParticles();
+    };
+
+    resizeCanvas();
+    createParticles();
+    animate();
+
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 z-10 pointer-events-none"
+      style={{ opacity: 0.8 }}
+    />
+  );
+};
+
+export default ParticleBackground;
