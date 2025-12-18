@@ -89,3 +89,66 @@ export const StaggerContainer = ({
     </motion.div>
   );
 };
+
+const staggerItemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut" as const,
+    },
+  },
+};
+
+export const StaggerItem = ({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) => {
+  return (
+    <motion.div variants={staggerItemVariants} className={className}>
+      {children}
+    </motion.div>
+  );
+};
+
+// Text reveal animation (character by character)
+interface TextRevealProps {
+  text: string;
+  className?: string;
+  delay?: number;
+}
+
+export const TextReveal = ({ text, className = "", delay = 0 }: TextRevealProps) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+
+  return (
+    <motion.span
+      ref={ref}
+      className={className}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+    >
+      {text.split("").map((char, index) => (
+        <motion.span
+          key={index}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{
+            duration: 0.4,
+            delay: delay + index * 0.03,
+            ease: "easeOut",
+          }}
+          style={{ display: "inline-block" }}
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+};
