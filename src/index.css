@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* VyomGarud Design System - Military/Futuristic Dark Theme */
+
+@layer base {
+  :root {
+    /* Core colors - Dark futuristic theme */
+    --background: 220 15% 6%;
+    --foreground: 0 0% 98%;
+
+    --card: 220 15% 10%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 15% 8%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Primary: Orange #ff7b00 */
+    --primary: 29 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 29 100% 60%;
+
+    /* Secondary: Darker surface */
+    --secondary: 220 15% 12%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 220 12% 18%;
+    --muted-foreground: 220 10% 60%;
+
+    --accent: 29 80% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 15% 18%;
+    --input: 220 15% 15%;
+    --ring: 29 100% 50%;
+
+    --radius: 0.5rem;
+
+    /* Custom design tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(29 100% 50%), hsl(29 100% 40%));
+    --gradient-dark: linear-gradient(180deg, hsl(220 15% 6%), hsl(220 15% 3%));
+    --gradient-card: linear-gradient(145deg, hsl(220 15% 12%), hsl(220 15% 8%));
+    --gradient-hero: radial-gradient(ellipse at 50% 0%, hsl(29 100% 50% / 0.15), transparent 60%);
+    
+    --shadow-glow: 0 0 40px hsl(29 100% 50% / 0.3);
+    --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.4);
+    --shadow-elevated: 0 20px 60px hsl(0 0% 0% / 0.5);
+    
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .dark {
+    --background: 220 15% 6%;
+    --foreground: 0 0% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(29 100% 55%), hsl(29 100% 45%));
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 30px hsl(29 100% 50% / 0.4), 0 0 60px hsl(29 100% 50% / 0.2);
+  }
+
+  .glow-subtle {
+    box-shadow: 0 0 20px hsl(29 100% 50% / 0.2);
+  }
+
+  .grid-overlay {
+    background-image: 
+      linear-gradient(hsl(220 15% 20% / 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(220 15% 20% / 0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .radar-lines {
+    background: 
+      radial-gradient(circle at center, transparent 0%, transparent 30%, hsl(29 100% 50% / 0.05) 31%, transparent 32%),
+      radial-gradient(circle at center, transparent 0%, transparent 50%, hsl(29 100% 50% / 0.03) 51%, transparent 52%),
+      radial-gradient(circle at center, transparent 0%, transparent 70%, hsl(29 100% 50% / 0.02) 71%, transparent 72%);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(220 15% 8%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(220 15% 25%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(29 100% 50%);
+}
