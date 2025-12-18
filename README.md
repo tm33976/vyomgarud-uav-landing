@@ -2,11 +2,10 @@
 
 A modern, high-performance website for an autonomous drone company built with React, TypeScript, and Tailwind CSS. Features stunning animations, particle effects, and an interactive chatbot.
 
-![SkyForce Drones](https://img.shields.io/badge/React-18.3-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue) ![Tailwind](https://img.shields.io/badge/Tailwind-3.4-06B6D4) ![Framer Motion](https://img.shields.io/badge/Framer%20Motion-12.x-ff69b4)
 
 ## 🚀 Live Demo
 
-[View Live Site]()
+[View Live Site](https://landing-page-lime-kappa-52.vercel.app/)
 
 ---
 
