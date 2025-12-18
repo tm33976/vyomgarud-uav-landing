@@ -130,7 +130,7 @@ const ContactSection = () => {
                     Your Name
                   </label>
                   <Input
-                    placeholder="John Doe"
+                    placeholder="Tushar Mishra"
                     value={formData.name}
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
@@ -178,3 +178,23 @@ const ContactSection = () => {
                   required
                 />
               </motion.div>
+             
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.8 }}
+              >
+                <Button variant="hero" size="lg" className="w-full sm:w-auto">
+                  Send Message
+                  <Send className="ml-2 w-4 h-4" />
+                </Button>
+              </motion.div>
+            </motion.form>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ContactSection;
