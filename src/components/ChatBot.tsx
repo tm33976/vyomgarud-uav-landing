@@ -119,3 +119,65 @@ const ChatBot = () => {
                 <X size={18} className="text-primary-foreground" />
               </button>
             </div>
+             {/* Content */}
+            <div className="h-[400px] flex flex-col">
+              {activeView === "menu" ? (
+                <div className="p-4 flex-1 overflow-y-auto">
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Welcome! How can I assist you today?
+                  </p>
+                  
+                  {/* Quick Actions */}
+                  <div className="space-y-3">
+                    {quickActions.map((action, index) => (
+                      <motion.button
+                        key={action.label}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        onClick={() => handleQuickAction(action.label)}
+                        className="w-full p-3 rounded-xl bg-secondary/50 border border-border hover:border-primary/50 hover:bg-secondary transition-all duration-300 flex items-center gap-3 group text-left"
+                      >
+                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                          <action.icon size={20} className="text-primary" />
+                        </div>
+                        <div>
+                          <p className="font-medium text-foreground text-sm">{action.label}</p>
+                          <p className="text-xs text-muted-foreground">{action.description}</p>
+                        </div>
+                      </motion.button>
+                    ))}
+                  </div>
+
+                  {/* Chat Option */}
+                  <button
+                    onClick={() => setActiveView("chat")}
+                    className="mt-4 w-full p-3 rounded-xl border border-primary/30 bg-primary/5 hover:bg-primary/10 transition-colors flex items-center justify-center gap-2 text-primary font-medium text-sm"
+                  >
+                    <MessageSquare size={18} />
+                    Start a conversation
+                  </button>
+                </div>
+              ) : (
+                <>
+                  {/* Chat Messages */}
+                  <div className="flex-1 p-4 overflow-y-auto space-y-4">
+                    {messages.map((msg, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                      >
+                        <div
+                          className={`max-w-[80%] p-3 rounded-xl text-sm whitespace-pre-wrap ${
+                            msg.role === "user"
+                              ? "bg-primary text-primary-foreground rounded-br-none"
+                              : "bg-secondary text-foreground rounded-bl-none"
+                          }`}
+                        >
+                          {msg.content}
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
