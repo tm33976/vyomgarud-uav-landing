@@ -77,3 +77,104 @@ const ContactSection = () => {
                 of our autonomous UAV systems.
               </p>
             </div>
+             <div className="space-y-6">
+              {contactInfo.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ 
+                    duration: 0.5, 
+                    delay: 0.3 + index * 0.1,
+                    ease: "easeOut"
+                  }}
+                  whileHover={{ x: 8 }}
+                  className="flex items-center gap-4 group cursor-default"
+                >
+                  <motion.div 
+                    className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <item.icon className="w-5 h-5 text-primary" />
+                  </motion.div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">{item.label}</p>
+                    <p className="font-medium text-foreground">{item.value}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            className="lg:col-span-3"
+          >
+            <motion.form
+              onSubmit={handleSubmit}
+              className="bg-card rounded-2xl border border-border/50 p-8 space-y-6"
+              whileHover={{ borderColor: "hsl(var(--primary) / 0.3)" }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="grid sm:grid-cols-2 gap-6">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                >
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Your Name
+                  </label>
+                  <Input
+                    placeholder="John Doe"
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    className="bg-background border-border focus:border-primary transition-colors duration-300"
+                    required
+                  />
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                >
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Email Address
+                  </label>
+                  <Input
+                    type="email"
+                    placeholder="john@example.com"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    className="bg-background border-border focus:border-primary transition-colors duration-300"
+                    required
+                  />
+                </motion.div>
+              </div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.7 }}
+              >
+                <label className="text-sm font-medium text-foreground mb-2 block">
+                  Your Message
+                </label>
+                <Textarea
+                  placeholder="Tell us about your requirements..."
+                  rows={5}
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
+                  className="bg-background border-border focus:border-primary resize-none transition-colors duration-300"
+                  required
+                />
+              </motion.div>
