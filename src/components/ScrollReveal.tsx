@@ -38,3 +38,54 @@ export const ScrollReveal = ({
   const ref = useRef(null);
   const isInView = useInView(ref, { once, amount: threshold });
   const initial = getInitialState(direction);
+return (
+    <motion.div
+      ref={ref}
+      initial={initial}
+      animate={isInView ? { opacity: 1, x: 0, y: 0 } : initial}
+      transition={{
+        duration,
+        delay,
+        ease: "easeOut",
+      }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+interface StaggerContainerProps {
+  children: ReactNode;
+  className?: string;
+  staggerDelay?: number;
+  once?: boolean;
+}
+
+export const StaggerContainer = ({
+  children,
+  className = "",
+  staggerDelay = 0.1,
+  once = true,
+}: StaggerContainerProps) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once, amount: 0.2 });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={{
+        visible: {
+          transition: {
+            staggerChildren: staggerDelay,
+          },
+        },
+      }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+};
