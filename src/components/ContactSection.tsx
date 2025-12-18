@@ -28,7 +28,7 @@ const ContactSection = () => {
 
   const contactInfo = [
     { icon: Mail, label: "Email", value: "contact@vyomgarud.com" },
-    { icon: Phone, label: "Phone", value: "+91 8881444693" },
+    { icon: Phone, label: "Phone", value: "+91 1234567890" },
     { icon: MapPin, label: "Location", value: "India" },
   ];
   return (
