@@ -78,3 +78,97 @@ const GallerySection = () => {
               Mission Portfolio
             </span>
           </ScrollReveal>
+            <ScrollReveal direction="up" delay={0.1}>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Our{" "}
+              <span className="text-gradient">Operations</span>
+            </h2>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="up" delay={0.2}>
+            <p className="text-lg text-muted-foreground">
+              Explore our diverse range of successful mission deployments across 
+              defense, surveillance, and emergency response operations.
+            </p>
+          </ScrollReveal>
+        </div>
+
+        {/* Category Filter */}
+        <ScrollReveal direction="up" delay={0.3}>
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  activeCategory === category
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-card border border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </ScrollReveal>
+
+        {/* Gallery Grid */}
+        <motion.div 
+          layout
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredItems.map((item, index) => (
+              <motion.div
+                key={item.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="group relative aspect-square rounded-xl overflow-hidden"
+              >
+                {/* Image */}
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-300" />
+                
+                {/* Content */}
+                <div className="absolute inset-0 p-6 flex flex-col justify-end">
+                  <motion.span 
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-xs font-semibold text-primary uppercase tracking-wider mb-2"
+                  >
+                    {item.category}
+                  </motion.span>
+                  <motion.h3 
+                    className="text-xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors duration-300"
+                  >
+                    {item.title}
+                  </motion.h3>
+                  <motion.p 
+                    className="text-sm text-muted-foreground line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  >
+                    {item.description}
+                  </motion.p>
+                </div>
+
+                {/* Hover Border */}
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-primary/50 rounded-xl transition-colors duration-300" />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default GallerySection;
