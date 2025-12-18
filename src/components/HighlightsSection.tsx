@@ -51,3 +51,64 @@ const HighlightsSection = () => {
             </h2>
           </ScrollReveal>
         </div>
+         {/* Highlights */}
+        <div className="max-w-4xl mx-auto space-y-8">
+          {highlights.map((highlight, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -50 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ 
+                duration: 0.6, 
+                delay: index * 0.2,
+                ease: "easeOut"
+              }}
+              whileHover={{ 
+                x: 10, 
+                transition: { duration: 0.2 } 
+              }}
+              className="flex gap-6 items-start p-6 rounded-xl bg-card/50 border border-border/50 hover:border-primary/30 hover:bg-card transition-all duration-300 group cursor-default"
+            >
+              {/* Check Icon */}
+              <motion.div 
+                initial={{ scale: 0, rotate: -180 }}
+                animate={isInView ? { scale: 1, rotate: 0 } : {}}
+                transition={{
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 15,
+                  delay: index * 0.2 + 0.3,
+                }}
+                className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-all duration-300"
+              >
+                <Check className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
+              </motion.div>
+
+              {/* Content */}
+              <div>
+                <motion.h3 
+                  className="text-xl font-bold mb-2 text-foreground"
+                  initial={{ opacity: 0 }}
+                  animate={isInView ? { opacity: 1 } : {}}
+                  transition={{ duration: 0.4, delay: index * 0.2 + 0.2 }}
+                >
+                  {highlight.title}
+                </motion.h3>
+                <motion.p 
+                  className="text-muted-foreground leading-relaxed"
+                  initial={{ opacity: 0 }}
+                  animate={isInView ? { opacity: 1 } : {}}
+                  transition={{ duration: 0.4, delay: index * 0.2 + 0.3 }}
+                >
+                  {highlight.description}
+                </motion.p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default HighlightsSection;
