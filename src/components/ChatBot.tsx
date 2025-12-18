@@ -181,3 +181,42 @@ const ChatBot = () => {
                       </motion.div>
                     ))}
                   </div>
+                       {/* Back Button */}
+                  <button
+                    onClick={() => setActiveView("menu")}
+                    className="mx-4 mb-2 text-xs text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
+                  >
+                    <Zap size={12} /> Quick actions
+                  </button>
+                </>
+              )}
+
+              {/* Input */}
+              {activeView === "chat" && (
+                <div className="p-4 pt-0 flex gap-2">
+                  <Input
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
+                    placeholder="Type your message..."
+                    className="bg-secondary border-border focus:border-primary"
+                  />
+                  <Button 
+                    onClick={handleSendMessage}
+                    variant="default" 
+                    size="icon"
+                    className="shrink-0"
+                  >
+                    <Send size={18} />
+                  </Button>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+export default ChatBot;
