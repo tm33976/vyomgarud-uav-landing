@@ -96,3 +96,48 @@ const ParticleBackground = () => {
             ctx.stroke();
           }
         }
+
+         // Connect to mouse
+        const mouseDx = particle.x - mouseRef.current.x;
+        const mouseDy = particle.y - mouseRef.current.y;
+        const mouseDistance = Math.sqrt(mouseDx * mouseDx + mouseDy * mouseDy);
+
+        if (mouseDistance < 200) {
+          const opacity = (1 - mouseDistance / 200) * 0.4;
+          ctx.beginPath();
+          ctx.moveTo(particle.x, particle.y);
+          ctx.lineTo(mouseRef.current.x, mouseRef.current.y);
+          ctx.strokeStyle = `rgba(255, 123, 0, ${opacity})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      });
+    };
+
+    const updateParticles = () => {
+      particles.current.forEach((particle) => {
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+
+        // Bounce off edges
+        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+
+        // Mouse repulsion
+        const dx = particle.x - mouseRef.current.x;
+        const dy = particle.y - mouseRef.current.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < 100) {
+          const force = (100 - distance) / 100;
+          particle.vx += (dx / distance) * force * 0.2;
+          particle.vy += (dy / distance) * force * 0.2;
+        }
+
+        // Damping
+        particle.vx *= 0.99;
+        particle.vy *= 0.99;
+      });
+    };
+
+    
